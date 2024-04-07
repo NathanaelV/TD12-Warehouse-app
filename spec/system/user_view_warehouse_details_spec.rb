@@ -4,9 +4,9 @@ describe 'User sees warehouse details' do
   it 'sees additional information' do
     # Arrange
     Warehouse.create(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
-                     address: 'Avenida do Aeroporto, 1000', cep: '15000-000', 
+                     address: 'Avenida do Aeroporto, 1000', cep: '15000-000',
                      description: 'Galpão destinado para cargas internacionais')
-    
+
     # Act
     visit(root_path)
     click_on('Aeroporto SP')
@@ -23,14 +23,14 @@ describe 'User sees warehouse details' do
   it 'returns to home screen' do
     # Arrange
     Warehouse.create(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
-                     address: 'Avenida do Aeroporto, 1000', cep: '15000-000', 
+                     address: 'Avenida do Aeroporto, 1000', cep: '15000-000',
                      description: 'Galpão destinado para cargas internacionais')
-    
+
     # Act
     visit root_path
     click_on 'Aeroporto SP'
     click_on 'Menu'
-                    
+
     # Assert
     expect(current_path).to eq(root_path)
   end
