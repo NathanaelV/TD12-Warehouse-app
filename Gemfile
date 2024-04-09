@@ -23,6 +23,7 @@ group :development, :test do
   gem 'capybara'
   gem 'debug', platforms: %i[mri windows]
   gem 'rspec-rails'
+  gem 'byebug'
 end
 
 group :development do
