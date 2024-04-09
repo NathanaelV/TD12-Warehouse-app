@@ -30,6 +30,7 @@ describe 'User view homepage and' do
     expect(page).to have_content('Cidade: Maceio')
     expect(page).to have_content('50000 m2')
     expect(page).not_to have_content('Não existem galpões cadastrados.')
+    expect(page).not_to have_content('Galpão cadastrado com sucesso.')
   end
 
   it 'there are no registered warehouses' do
