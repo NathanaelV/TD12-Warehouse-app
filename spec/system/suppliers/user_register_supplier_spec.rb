@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "User register supplier" do
+describe 'User register supplier' do
   it 'from homepage' do
     # Arrange
 

@@ -5,8 +5,7 @@ class SuppliersController < ApplicationController
     @suppliers = Supplier.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @supplier = Supplier.new
@@ -23,8 +22,8 @@ class SuppliersController < ApplicationController
     end
   end
 
-  def edit;end
-  
+  def edit; end
+
   def update
     if @supplier.update(supplier_params)
       redirect_to @supplier, notice: 'Fornecedor atualizado com sucesso'
@@ -37,9 +36,10 @@ class SuppliersController < ApplicationController
   private
 
   def supplier_params
-    params.require(:supplier).permit(:brand_name, :corporate_name, :registration_number, :full_address, :city, :state,:email)
+    params.require(:supplier).permit(:brand_name, :corporate_name, :registration_number, :full_address, :city, :state,
+                                     :email)
   end
-  
+
   def set_supplier
     @supplier = Supplier.find(params[:id])
   end
