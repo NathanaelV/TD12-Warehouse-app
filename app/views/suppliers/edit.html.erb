@@ -1,0 +1,15 @@
+<h2>Editar formulário <%= @supplier.brand_name %></h2>
+
+<div>
+  <% if @supplier.errors.any? %>
+    <ul>
+      <% @supplier.errors.full_messages.each do |error_msg| %>
+        <li><%= error_msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<div>
+  <%= render 'form' %>
+</div>

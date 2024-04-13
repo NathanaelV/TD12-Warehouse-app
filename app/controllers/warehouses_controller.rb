@@ -22,7 +22,7 @@ class WarehousesController < ApplicationController
 
   def update
     if @warehouse.update(warehouse_params)
-      redirect_to warehouse_path(@warehouse), notice: 'Galpão atualizado com sucesso'
+      redirect_to @warehouse, notice: 'Galpão atualizado com sucesso'
     else
       flash.now[:notice] = 'Não foi possível atualizar o galpão'
       render :edit

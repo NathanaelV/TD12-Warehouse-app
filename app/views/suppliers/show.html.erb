@@ -2,6 +2,10 @@
 <h2><%= @supplier.corporate_name %></h2>
 
 <div>
+  <%= link_to 'Editar', edit_supplier_path %>
+</div>
+
+<div>
   <dl>
     <dt>CNPJ:</dt>
     <dd><%= @supplier.registration_number %></dd>
@@ -11,5 +15,3 @@
     <dd><%= @supplier.email %></dd>
   </dl>
 </div>
-
-<%= link_to '' %>

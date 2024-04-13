@@ -1,10 +1,11 @@
 class SuppliersController < ApplicationController
+  before_action :set_supplier, only: %i[show edit update]
+
   def index
     @suppliers = Supplier.all
   end
 
   def show
-    @supplier = Supplier.find(params[:id])
   end
 
   def new
@@ -12,7 +13,6 @@ class SuppliersController < ApplicationController
   end
 
   def create
-    supplier_params = params.require(:supplier).permit(:brand_name, :corporate_name, :registration_number, :full_address, :city, :state, :email)
     @supplier = Supplier.new(supplier_params)
 
     if @supplier.save
@@ -21,5 +21,26 @@ class SuppliersController < ApplicationController
       flash.now[:alert] = 'Fornecedor não foi criado'
       render :new
     end
+  end
+
+  def edit;end
+  
+  def update
+    if @supplier.update(supplier_params)
+      redirect_to @supplier, notice: 'Fornecedor atualizado com sucesso'
+    else
+      flash.now[:alert] = 'Não foi possível atulizar o fornecedor'
+      render :edit
+    end
+  end
+
+  private
+
+  def supplier_params
+    params.require(:supplier).permit(:brand_name, :corporate_name, :registration_number, :full_address, :city, :state,:email)
+  end
+  
+  def set_supplier
+    @supplier = Supplier.find(params[:id])
   end
 end
