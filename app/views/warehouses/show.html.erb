@@ -3,7 +3,7 @@
 
 <div>
   <%= link_to 'Editar', edit_warehouse_path(@warehouse) %>
-  <%= button_to 'Deletar', warehouse_path(@warehouse), method: :delete %>
+  <%= button_to 'Deletar', @warehouse, method: :delete %>
 </div>
 
 <div>
@@ -11,8 +11,4 @@
     <strong>Cidade:</strong> <%= @warehouse.city %>
     <strong>Área:</strong> <%= @warehouse.area %> m2
     <strong>Endereço:</strong> <%= @warehouse.address %> <strong>CEP:</strong> <%= @warehouse.cep %>
-</div>
-
-<div>
-  <%= link_to 'Menu', root_path %>
 </div>
