@@ -1,7 +1,10 @@
 <h1>Galpão <%= @warehouse.code %></h1>
 <h2><%= @warehouse.description %></h2>
 
-<%= link_to 'Editar', edit_warehouse_path(@warehouse) %>
+<div>
+  <%= link_to 'Editar', edit_warehouse_path(@warehouse) %>
+  <%= button_to 'Deletar', warehouse_path(@warehouse), method: :delete %>
+</div>
 
 <div>
     <strong>Nome:</strong> <%= @warehouse.name %>
@@ -10,4 +13,6 @@
     <strong>Endereço:</strong> <%= @warehouse.address %> <strong>CEP:</strong> <%= @warehouse.cep %>
 </div>
 
-<%= link_to 'Menu', root_path %>
+<div>
+  <%= link_to 'Menu', root_path %>
+</div>
