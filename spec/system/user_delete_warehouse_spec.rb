@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "User remove a warehouse" do
+describe 'User remove a warehouse' do
   it 'successfully' do
     # Arrange
     Warehouse.create!(name: 'Rio', code: 'SDU', city: 'Rio de Janeiro', area: 60_000, address: 'Av do Porto, 1000',
