@@ -1,0 +1,14 @@
+<h2>Cadastrar Fornecedor</h2>
+
+<% if @supplier.errors.any? %>
+  <p>Corrija os erros abaixo:</p>
+  <ul>
+    <%= @supplier.errors.full_messages.each do |error_msg| %>
+      <li><%= error_msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div>
+  <%= render 'form' %>
+</div>
