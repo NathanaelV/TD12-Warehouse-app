@@ -9,14 +9,19 @@ class ProductModelsController < ApplicationController
 
   def new
     @product_model = ProductModel.new
-    @suppliers = Supplier.order(:name)
+    @suppliers = Supplier.order(:brand_name)
   end
 
   def create
     @product_model = ProductModel.new(product_model_params)
 
-    @product_model.save
-    redirect_to @product_model, notice: 'Modelo de produto cadastrado com sucesso.'
+    if @product_model.save
+      redirect_to @product_model, notice: 'Modelo de produto cadastrado com sucesso.'
+    else
+      @suppliers = Supplier.order(:brand_name)
+      flash.now[:alert] = 'Não foi possível cadastrar o modelo de produto'
+      render :new
+    end
   end
 
   private
