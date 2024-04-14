@@ -20,9 +20,9 @@ describe 'User view product model' do
                                 registration_number: '123123123000322', full_address: 'Av Nações Unidas, 1000',
                                 city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br')
     ProductModel.create!(name: 'TV-32', weight: 8000, height: 45, depth: 10, sku: 'TV32-SAMSU-XPTO90',
-                         supplier: supplier)
+                         supplier:)
     ProductModel.create!(name: 'SoundBar 7.1 Surround', weight: 3000, height: 80, depth: 15, sku: 'SOU71-SAMSU-NOIZ77',
-                         supplier: supplier)
+                         supplier:)
 
     # Act
     visit root_path
@@ -42,7 +42,7 @@ describe 'User view product model' do
   it '' do
     # Arrange
 
-    # Act 
+    # Act
     visit root_path
     click_on 'Modelos de Produtos'
 
