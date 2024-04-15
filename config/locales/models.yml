@@ -3,7 +3,6 @@ pt-BR:
     models:
       warehouse: 'Galpão'
       supplier: 'Fornecedor'
-      user: 'Usuário'
     attributes:
       warehouse:
         name: 'Nome'
@@ -21,7 +20,3 @@ pt-BR:
         city: 'Cidade'
         state: 'Estado'
         email: 'E-mail'
-      user:
-        email: 'E-mail'
-        password: 'Senha'
-        name: 'Nome'
