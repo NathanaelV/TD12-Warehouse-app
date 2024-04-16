@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'User register Product Model' do
   it 'successfully' do
     # Arrange
+    user = User.create!(name: 'João', email: 'joao@email.com', password: 'password')
     Supplier.create!(brand_name: 'Samsung', corporate_name: 'Samsung Eletronicos LTDA',
                      registration_number: '123123123000322', full_address: 'Av Nações Unidas, 1000',
                      city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br')
@@ -11,6 +12,7 @@ describe 'User register Product Model' do
                      full_address: 'Av Ibirapuera, 300', city: 'São Paulo', state: 'SP', email: 'contato@lg.com.br')
 
     # Act
+    login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
     click_on 'Cadastrar Novo'
@@ -34,11 +36,13 @@ describe 'User register Product Model' do
 
   it 'successfully' do
     # Arrange
+    user = User.create!(name: 'João', email: 'joao@email.com', password: 'password')
     Supplier.create!(brand_name: 'Samsung', corporate_name: 'Samsung Eletronicos LTDA',
                      registration_number: '123123123000322', full_address: 'Av Nações Unidas, 1000',
                      city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br')
 
     # Act
+    login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
     click_on 'Cadastrar Novo'

@@ -1,10 +1,25 @@
 require 'rails_helper'
 
 describe 'User view product model' do
-  it 'from homepage' do
+  it 'if authenticated' do
     # Arrange
 
     # Act
+    visit root_path
+    within('nav') do
+      click_on 'Modelos de Produtos'
+    end
+
+    # Assert
+    expect(current_path).to eq new_user_session_path
+  end
+
+  it 'from homepage' do
+    # Arrange
+    user = User.create!(name: 'João', email: 'joao@email.com', password: 'password')
+
+    # Act
+    login_as(user)
     visit root_path
     within('nav') do
       click_on 'Modelos de Produtos'
@@ -16,6 +31,7 @@ describe 'User view product model' do
 
   it 'successfully' do
     # Arrange
+    user = User.create!(name: 'João', email: 'joao@email.com', password: 'password')
     supplier = Supplier.create!(brand_name: 'Samsung', corporate_name: 'Samsung Eletronicos LTDA',
                                 registration_number: '123123123000322', full_address: 'Av Nações Unidas, 1000',
                                 city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br')
@@ -25,6 +41,7 @@ describe 'User view product model' do
                          sku: 'SOU71-SAMSU-NOIZ77', supplier:)
 
     # Act
+    login_as(user)
     visit root_path
     within('nav') do
       click_on 'Modelos de Produtos'
@@ -41,8 +58,10 @@ describe 'User view product model' do
 
   it 'and there are no product model' do
     # Arrange
+    user = User.create!(name: 'João', email: 'joao@email.com', password: 'password')
 
     # Act
+    login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
 
