@@ -17,13 +17,13 @@ describe 'User register an order' do
     user = User.create!(name: 'Sergião', email: 'sergiao@email.com', password: '1234abcd')
 
     supplier = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number: '434472216000123',
-                                full_address: 'Av das Palmas, 100', city: 'Bauru', state: 'SP', 
+                                full_address: 'Av das Palmas, 100', city: 'Bauru', state: 'SP',
                                 email: 'contato@acme.com')
     Supplier.create!(corporate_name: 'Spark Industries Brasil LTDA', brand_name: 'Spark',
                      registration_number: '60279287182000123', full_address: 'Torre da Indústria Brasil LTDA',
                      city: 'Teresina', state: 'PI', email: 'vendedor@spark.com.br')
 
-    warehouse = Warehouse.create!(name: 'Galpão Rio', code: 'SDU', city: 'Rio de Janeiro', area: 60_000, 
+    warehouse = Warehouse.create!(name: 'Galpão Rio', code: 'SDU', city: 'Rio de Janeiro', area: 60_000,
                                   address: 'Av do Porto, 1000', cep: '20000-000', description: 'Galpão do Rio')
     Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
                       address: 'Avenida do Aeroporto, 1000', cep: '15000-000',
