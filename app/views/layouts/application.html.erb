@@ -11,9 +11,10 @@
 
   <body>
     <header>
-      <h1>Galpões & Estoque</h1>
-      <nav>        
-        <%= link_to 'Menu', root_path %> | 
+      <nav>
+        <%= link_to root_path do %>
+          <h1>Galpões & Estoque</h1>
+        <% end %>
         <%= link_to 'Fornecedores', suppliers_path %> | 
         <%= link_to 'Modelos de Produtos', product_models_path %> | 
         <%= link_to 'Registrar Pedido', new_order_path %> | 
