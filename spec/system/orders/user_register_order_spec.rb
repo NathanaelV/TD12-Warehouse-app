@@ -23,8 +23,8 @@ describe 'User register an order' do
                      registration_number: '60279287182000123', full_address: 'Torre da Indústria Brasil LTDA',
                      city: 'Teresina', state: 'PI', email: 'vendedor@spark.com.br')
 
-    warehouse = Warehouse.create!(name: 'Galpão Rio', code: 'SDU', city: 'Rio de Janeiro', area: 60_000,
-                                  address: 'Av do Porto, 1000', cep: '20000-000', description: 'Galpão do Rio')
+    Warehouse.create!(name: 'Galpão Rio', code: 'SDU', city: 'Rio de Janeiro', area: 60_000,
+                      address: 'Av do Porto, 1000', cep: '20000-000', description: 'Galpão do Rio')
     Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
                       address: 'Avenida do Aeroporto, 1000', cep: '15000-000',
                       description: 'Galpão destinado para cargas internacionais')
@@ -33,14 +33,14 @@ describe 'User register an order' do
     login_as(user)
     visit root_path
     click_on 'Registrar Pedido'
-    select warehouse.name, from: 'Galpão Destino'
+    select 'SDU - Galpão Rio', from: 'Galpão Destino'
     select supplier.corporate_name, from: 'Fornecedor'
     fill_in 'Data Prevista de Entrega', with: '20/12/2022'
     click_on 'Gravar'
 
     # Assert
     expect(page).to have_content 'Pedido registrado com sucesso'
-    expect(page).to have_content 'Galpão Destino: Galpão Rio'
+    expect(page).to have_content 'Galpão Destino: SDU - Galpão Rio'
     expect(page).to have_content 'Fornecedor: ACME LTDA'
     expect(page).to have_content 'Usuário Responsável: Sergião | sergiao@email.com'
     expect(page).to have_content 'Data Prevista de Entrega: 20/12/2022'
