@@ -27,9 +27,8 @@ describe 'User view suppliers details' do
     visit root_path
     click_on 'Fornecedor'
     click_on 'ACME'
-    click_on 'Galpões & Estoque'
 
     # Assert
-    expect(current_path).to eq root_path
+    expect(page).to have_link 'Galpões & Estoque', href: root_path
   end
 end

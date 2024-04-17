@@ -29,9 +29,8 @@ describe 'User sees warehouse details' do
     # Act
     visit root_path
     click_on 'Aeroporto SP'
-    click_on 'Galpões & Estoque'
 
     # Assert
-    expect(current_path).to eq(root_path)
+    expect(page).to have_link 'Galpões & Estoque', href: root_path
   end
 end
