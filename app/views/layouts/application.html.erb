@@ -19,7 +19,7 @@
         <%= link_to 'Modelos de Produtos', product_models_path %> | 
         <%= link_to 'Registrar Pedido', new_order_path %> | 
         <% if user_signed_in? %>
-          <%= current_user.email %> | 
+          <%= current_user.description %> | 
           Olá <%= current_user.name %> | 
           <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
         <% else %>

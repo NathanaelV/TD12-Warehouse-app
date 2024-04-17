@@ -42,7 +42,7 @@ describe 'User register an order' do
     expect(page).to have_content 'Pedido registrado com sucesso'
     expect(page).to have_content 'Galpão Destino: SDU - Galpão Rio'
     expect(page).to have_content 'Fornecedor: ACME LTDA'
-    expect(page).to have_content 'Usuário Responsável: Sergião | sergiao@email.com'
+    expect(page).to have_content 'Usuário Responsável: Sergião <sergiao@email.com>'
     expect(page).to have_content 'Data Prevista de Entrega: 20/12/2022'
     expect(page).not_to have_content 'Aeroporto SP'
     expect(page).not_to have_content 'Spark Industries Brasil LTDA'
