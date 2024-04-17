@@ -29,7 +29,7 @@ describe 'User sees warehouse details' do
     # Act
     visit root_path
     click_on 'Aeroporto SP'
-    click_on 'Menu'
+    click_on 'Galpões & Estoque'
 
     # Assert
     expect(current_path).to eq(root_path)
