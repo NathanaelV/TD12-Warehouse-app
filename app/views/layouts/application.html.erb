@@ -16,6 +16,7 @@
         <%= link_to 'Menu', root_path %> | 
         <%= link_to 'Fornecedores', suppliers_path %> | 
         <%= link_to 'Modelos de Produtos', product_models_path %> | 
+        <%= link_to 'Registrar Pedido', new_order_path %> | 
         <% if user_signed_in? %>
           <%= current_user.email %> | 
           Olá <%= current_user.name %> | 
