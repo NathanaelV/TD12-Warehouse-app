@@ -8,6 +8,6 @@ class Order < ApplicationRecord
   private
 
   def generate_code
-    self.code = 'ABCD123'
+    self.code = 'ABCD1234'
   end
 end
