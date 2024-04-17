@@ -36,7 +36,7 @@ describe 'User register an order' do
     select 'SDU - Galpão Rio', from: 'Galpão Destino'
     select supplier.corporate_name, from: 'Fornecedor'
     fill_in 'Data Prevista de Entrega', with: '20/12/2022'
-    click_on 'Gravar'
+    click_on 'Criar Pedido'
 
     # Assert
     expect(page).to have_content 'Pedido registrado com sucesso'

@@ -3,5 +3,5 @@ pt-BR:
     models:
       user: Usuário
     attributes:
-      product_model:
+      user:
         name: 'Nome'
