@@ -20,7 +20,7 @@ RSpec.describe Order, type: :model do
       result = order.valid?
 
       # Assert
-      expect(result).to be_true
+      expect(result).to be true
     end
   end
 
