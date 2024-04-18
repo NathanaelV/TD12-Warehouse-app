@@ -29,6 +29,8 @@ describe 'User register an order' do
                       address: 'Avenida do Aeroporto, 1000', cep: '15000-000',
                       description: 'Galpão destinado para cargas internacionais')
 
+    allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('ABCD1234')
+
     # Act
     login_as(user)
     visit root_path
@@ -40,6 +42,7 @@ describe 'User register an order' do
 
     # Assert
     expect(page).to have_content 'Pedido registrado com sucesso'
+    expect(page).to have_content 'Pedido ABCD1234'
     expect(page).to have_content 'Galpão Destino: SDU - Galpão Rio'
     expect(page).to have_content 'Fornecedor: ACME LTDA'
     expect(page).to have_content 'Usuário Responsável: Sergião <sergiao@email.com>'

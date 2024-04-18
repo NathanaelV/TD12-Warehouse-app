@@ -8,6 +8,6 @@ class Order < ApplicationRecord
   private
 
   def generate_code
-    self.code = 'ABCD1234'
+    self.code = SecureRandom.alphanumeric(8).upcase
   end
 end
