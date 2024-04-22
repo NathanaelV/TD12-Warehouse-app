@@ -15,7 +15,7 @@ RSpec.describe Order, type: :model do
                                   city: 'Bauru', state: 'SP', email: 'contato@acme.com')
 
       order = Order.new(user:, warehouse:, supplier:, estimated_delivery_date: '2022-10-15')
-    
+
       # Act
       result = order.valid?
 
