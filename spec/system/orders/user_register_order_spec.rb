@@ -30,6 +30,7 @@ describe 'User register an order' do
                       description: 'Galpão destinado para cargas internacionais')
 
     allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('ABCD1234')
+    future_date = 2.day.from_now.strftime('%d/%m/%Y')
 
     # Act
     login_as(user)
@@ -37,7 +38,7 @@ describe 'User register an order' do
     click_on 'Registrar Pedido'
     select 'SDU - Galpão Rio', from: 'Galpão Destino'
     select supplier.corporate_name, from: 'Fornecedor'
-    fill_in 'Data Prevista de Entrega', with: '20/12/2022'
+    fill_in 'Data Prevista de Entrega', with: future_date
     click_on 'Criar Pedido'
 
     # Assert
@@ -46,7 +47,7 @@ describe 'User register an order' do
     expect(page).to have_content 'Galpão Destino: SDU - Galpão Rio'
     expect(page).to have_content 'Fornecedor: ACME LTDA'
     expect(page).to have_content 'Usuário Responsável: Sergião <sergiao@email.com>'
-    expect(page).to have_content 'Data Prevista de Entrega: 20/12/2022'
+    expect(page).to have_content "Data Prevista de Entrega: #{future_date}"
     expect(page).not_to have_content 'Aeroporto SP'
     expect(page).not_to have_content 'Spark Industries Brasil LTDA'
   end
