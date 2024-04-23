@@ -15,8 +15,8 @@ class Order < ApplicationRecord
   end
 
   def estimated_delivery_date_is_future
-    if estimated_delivery_date.present? && estimated_delivery_date <= Date.today
-      errors.add(:estimated_delivery_date, ' deve ser futura.')
-    end
+    return unless estimated_delivery_date.present? && estimated_delivery_date <= Date.today
+
+    errors.add(:estimated_delivery_date, ' deve ser futura.')
   end
 end
