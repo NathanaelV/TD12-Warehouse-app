@@ -90,4 +90,18 @@ describe 'User search order' do
     expect(page).not_to have_content 'SDU00700'
     expect(page).not_to have_content 'Galpão Destino: SDU - Galpão Rio'
   end
+
+  it 'there is no order registered' do
+    # Arrange
+    user = User.create!(name: 'João', email: 'joao@email.com', password: 'password')
+
+    # Act
+    login_as(user)
+    visit root_path
+    fill_in 'Buscar Pedido',	with: 'GRU'
+    click_on 'Buscar'
+
+    # Assert
+    expect(page).to have_content 'Nenhum pedido encotrado.'
+  end
 end
