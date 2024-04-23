@@ -51,4 +51,29 @@ describe 'User register an order' do
     expect(page).not_to have_content 'Aeroporto SP'
     expect(page).not_to have_content 'Spark Industries Brasil LTDA'
   end
+
+  it 'and does not give the name' do
+    # Arrange
+    user = User.create!(name: 'Sergião', email: 'sergiao@email.com', password: '1234abcd')
+
+    supplier = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number: '434472216000123',
+                                full_address: 'Av das Palmas, 100', city: 'Bauru', state: 'SP',
+                                email: 'contato@acme.com')
+
+    Warehouse.create!(name: 'Galpão Rio', code: 'SDU', city: 'Rio de Janeiro', area: 60_000,
+                      address: 'Av do Porto, 1000', cep: '20000-000', description: 'Galpão do Rio')
+
+    # Act
+    login_as(user)
+    visit root_path
+    click_on 'Registrar Pedido'
+    select 'SDU - Galpão Rio', from: 'Galpão Destino'
+    select supplier.corporate_name, from: 'Fornecedor'
+    fill_in 'Data Prevista de Entrega', with: ''
+    click_on 'Criar Pedido'
+
+    # Assert
+    expect(page).to have_content 'Não foi possível registrar o pedido.'
+    expect(page).to have_content 'Data Prevista de Entrega não pode ficar em branco'
+  end
 end

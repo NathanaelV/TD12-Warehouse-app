@@ -14,8 +14,15 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.user = current_user
-    @order.save!
-    redirect_to @order, notice: 'Pedido registrado com sucesso'
+
+    if @order.save
+      redirect_to @order, notice: 'Pedido registrado com sucesso'
+    else
+      @warehouses = Warehouse.order(:name)
+      @suppliers = Supplier.order(:corporate_name)
+      flash.now[:alert] = 'Não foi possível registrar o pedido.'
+      render :new
+    end
   end
 
   private
