@@ -25,6 +25,11 @@ class OrdersController < ApplicationController
     end
   end
 
+  def search
+    @code = params[:query]
+    @order = Order.find_by(code: @code)
+  end
+
   private
 
   def order_params
