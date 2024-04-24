@@ -48,6 +48,7 @@ describe 'User register an order' do
     expect(page).to have_content 'Fornecedor: ACME LTDA'
     expect(page).to have_content 'Usuário Responsável: Sergião <sergiao@email.com>'
     expect(page).to have_content "Data Prevista de Entrega: #{future_date}"
+    expect(page).to have_content 'Status: Pendente'
     expect(page).not_to have_content 'Aeroporto SP'
     expect(page).not_to have_content 'Spark Industries Brasil LTDA'
   end

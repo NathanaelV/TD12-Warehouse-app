@@ -25,11 +25,14 @@ describe 'User view own orders' do
                                   address: 'Avenida do Aeroporto, 1000', cep: '15000-000',
                                   description: 'Galpão destinado para cargas internacionais')
 
-    first_order = Order.create!(user:, warehouse:, supplier:, estimated_delivery_date: 2.day.from_now)
+    first_order = Order.create!(user:, warehouse:, supplier:, estimated_delivery_date: 2.day.from_now,
+                                status: 'pending')
 
-    second_order = Order.create!(user: second_user, warehouse:, supplier:, estimated_delivery_date: 2.day.from_now)
+    second_order = Order.create!(user: second_user, warehouse:, supplier:, estimated_delivery_date: 2.day.from_now,
+                                 status: 'delivered')
 
-    third_order = Order.create!(user:, warehouse:, supplier:, estimated_delivery_date: 2.day.from_now)
+    third_order = Order.create!(user:, warehouse:, supplier:, estimated_delivery_date: 2.day.from_now,
+                                status: 'canceled')
 
     # Act
     login_as(user)
@@ -38,8 +41,11 @@ describe 'User view own orders' do
 
     # Assert
     expect(page).to have_content first_order.code
+    expect(page).to have_content 'Pendente'
     expect(page).not_to have_content second_order.code
+    expect(page).not_to have_content 'Entregue'
     expect(page).to have_content third_order.code
+    expect(page).to have_content 'Cancelado'
   end
 
   it 'visit an order' do
