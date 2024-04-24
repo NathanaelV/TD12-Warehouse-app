@@ -30,8 +30,8 @@ describe 'User edit order' do
                                 full_address: 'Av das Palmas, 100', city: 'Bauru', state: 'SP',
                                 email: 'contato@acme.com')
     Supplier.create!(corporate_name: 'Spark Industries Brasil LTDA', brand_name: 'Spark',
-                    registration_number: '434472111000123', full_address: 'Torre da Spark Brasil',
-                    city: 'Teresina', state: 'PI', email: 'vendedor@spark.com.br')
+                     registration_number: '434472111000123', full_address: 'Torre da Spark Brasil',
+                     city: 'Teresina', state: 'PI', email: 'vendedor@spark.com.br')
 
     warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
                                   address: 'Avenida do Aeroporto, 1000', cep: '15000-000',
