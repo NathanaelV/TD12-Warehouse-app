@@ -7,6 +7,9 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    if @order.user != current_user
+      redirect_to root_path, alert: 'Você não possui acesso a este pedido.'
+    end
   end
 
   def new
@@ -32,6 +35,9 @@ class OrdersController < ApplicationController
   def search
     @code = params[:query]
     @orders = Order.where('code LIKE ?', "%#{@code}%")
+  end
+
+  def edit
   end
 
   private
