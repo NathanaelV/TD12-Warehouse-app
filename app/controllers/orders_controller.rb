@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
     @orders = current_user.orders
   end
 
-  def show;end
+  def show; end
 
   def new
     @order = Order.new
