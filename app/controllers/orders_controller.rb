@@ -1,16 +1,12 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_order_and_check_user, only: %i[show edit update]
 
   def index
     @orders = current_user.orders
   end
 
-  def show
-    @order = Order.find(params[:id])
-    return unless @order.user != current_user
-
-    redirect_to root_path, alert: 'Você não possui acesso a este pedido.'
-  end
+  def show;end
 
   def new
     @order = Order.new
@@ -38,15 +34,12 @@ class OrdersController < ApplicationController
   end
 
   def edit
-    @order = Order.find(params[:id])
     @warehouses = Warehouse.order(:name)
     @suppliers = Supplier.order(:corporate_name)
   end
 
   def update
-    @order = Order.find(params[:id])
     @order.update(order_params)
-
     redirect_to @order, notice: 'Pedido atualizado com sucesso.'
   end
 
@@ -54,5 +47,10 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:warehouse_id, :supplier_id, :estimated_delivery_date)
+  end
+
+  def set_order_and_check_user
+    @order = Order.find(params[:id])
+    redirect_to root_path, notice: 'Você não possui acesso a este pedido.' if @order.user != current_user
   end
 end
