@@ -2,6 +2,10 @@
 
 <h2><%= Order.model_name.human %> <%= @order.code %></h2>
 
+<div>
+  <%= link_to 'Editar', edit_order_path(@order) %>
+</div>
+
 <dl>
   <div>
     <dt><%= Order.human_attribute_name(:warehouse) %>:</dt>

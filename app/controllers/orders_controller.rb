@@ -38,6 +38,16 @@ class OrdersController < ApplicationController
   end
 
   def edit
+    @order = Order.find(params[:id])
+    @warehouses = Warehouse.order(:name)
+    @suppliers = Supplier.order(:corporate_name)
+  end
+
+  def update
+    @order = Order.find(params[:id])
+    @order.update(order_params)
+
+    redirect_to @order, notice: 'Pedido atualizado com sucesso.'
   end
 
   private
