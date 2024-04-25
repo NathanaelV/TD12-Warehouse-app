@@ -12,7 +12,12 @@ describe 'User update order status' do
     warehouse = Warehouse.create!(name: 'Galpão Rio', code: 'SDU', city: 'Rio de Janeiro', area: 60_000,
                                   address: 'Av do Porto, 1000', cep: '20000-000', description: 'Galpão do Rio')
 
+    product_model = ProductModel.create!(supplier:, name: 'Cadeira Gamer', weight: 5, height: 100, width: 70, depth: 75,
+                                         sku: 'CAR-GAMER-1234')
+
     order = Order.create!(user:, warehouse:, supplier:, estimated_delivery_date: 2.day.from_now, status: :pending)
+
+    OrderItem.create!(order:, product_model:, quantity: 5)
 
     # Act
     login_as user
@@ -26,6 +31,9 @@ describe 'User update order status' do
     expect(page).to have_content 'Status: Entregue'
     expect(page).not_to have_button 'Marcar como ENTREGUE'
     expect(page).not_to have_button 'Marcar como CANCELADO'
+    expect(StockProduct.count).to eq 5
+    stock = StockProduct.where(product_model:, warehouse:).count
+    expect(stock).to eq 5
   end
 
   it 'order was canceled' do
@@ -39,7 +47,12 @@ describe 'User update order status' do
     warehouse = Warehouse.create!(name: 'Galpão Rio', code: 'SDU', city: 'Rio de Janeiro', area: 60_000,
                                   address: 'Av do Porto, 1000', cep: '20000-000', description: 'Galpão do Rio')
 
+    product_model = ProductModel.create!(supplier:, name: 'Cadeira Gamer', weight: 5, height: 100, width: 70, depth: 75,
+                                    sku: 'CAR-GAMER-1234')
+
     order = Order.create!(user:, warehouse:, supplier:, estimated_delivery_date: 2.day.from_now, status: :pending)
+
+    OrderItem.create!(order:, product_model:, quantity: 5)
 
     # Act
     login_as user
@@ -51,5 +64,6 @@ describe 'User update order status' do
     # Assert
     expect(current_path).to eq order_path(order)
     expect(page).to have_content 'Status: Cancelado'
+    expect(StockProduct.count).to eq 0
   end
 end
