@@ -2,14 +2,12 @@ class OrderItemsController < ApplicationController
   def new
     @order = Order.find(params[:order_id])
     @order_item = OrderItem.new
-    @products = ProductModel.all
+    @products = @order.supplier.product_models
   end
 
   def create
     @order = Order.find(params[:order_id])
-    @order_item = OrderItem.new(order_item_params)
-    @order_item.order = @order
-    @order_item.save
+    @order.order_items.create(order_item_params)
 
     redirect_to @order, notice: 'Item adicionado com sucesso'
   end
