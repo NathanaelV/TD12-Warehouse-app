@@ -32,3 +32,5 @@
     <dd><%= t @order.status %></dd>
   </div>
 </dl>
+
+<%= button_to 'Marcar como ENTREGUE', delivered_order_path(@order) %>
