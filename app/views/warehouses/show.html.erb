@@ -12,3 +12,10 @@
     <strong>Área:</strong> <%= @warehouse.area %> m2
     <strong>Endereço:</strong> <%= @warehouse.address %> <strong>CEP:</strong> <%= @warehouse.cep %>
 </div>
+
+<div>
+  <h2>Itens em Estoque</h2>
+  <% @stocks.each_pair do |product_model, quantity| %>
+    <%= quantity %> x <%= product_model.sku %>
+  <% end %>
+</div>
