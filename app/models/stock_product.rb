@@ -7,6 +7,10 @@ class StockProduct < ApplicationRecord
 
   before_validation :generate_serial_number, on: :create
 
+  def available?
+    stock_product_destination.nil?
+  end
+
   private
 
   def generate_serial_number

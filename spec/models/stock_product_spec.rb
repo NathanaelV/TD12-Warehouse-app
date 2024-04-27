@@ -56,4 +56,55 @@ RSpec.describe StockProduct, type: :model do
       expect(stock_product.serial_number).to eq original_serial_number
     end
   end
+
+  describe '#available?' do
+    it 'true if there is no destination' do
+      # Arrange
+      user = User.create!(name: 'João', email: 'joao@email.com', password: 'password')
+
+      supplier = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME',
+                                  registration_number: '434472216000123', full_address: 'Av das Palmas, 100',
+                                  city: 'Bauru', state: 'SP', email: 'contato@acme.com')
+
+      warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
+                                    address: 'Avenida do Aeroporto, 1000', cep: '15000-000',
+                                    description: 'Galpão destinado para cargas internacionais')
+
+      order = Order.create!(user:, warehouse:, supplier:, estimated_delivery_date: 2.day.from_now, status: :delivered)
+
+      product_model = ProductModel.create!(supplier:, name: 'Cadeira Gamer', weight: 5, height: 100, width: 70,
+                                           depth: 75, sku: 'CAR-GAMER-1234')
+
+      # Act
+      stock_product = StockProduct.create!(order:, warehouse:, product_model:)
+
+      # Assert
+      expect(stock_product.available?).to eq true
+    end
+
+    it 'false it there is destination' do
+      # Arrange
+      user = User.create!(name: 'João', email: 'joao@email.com', password: 'password')
+
+      supplier = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME',
+                                  registration_number: '434472216000123', full_address: 'Av das Palmas, 100',
+                                  city: 'Bauru', state: 'SP', email: 'contato@acme.com')
+
+      warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
+                                    address: 'Avenida do Aeroporto, 1000', cep: '15000-000',
+                                    description: 'Galpão destinado para cargas internacionais')
+
+      order = Order.create!(user:, warehouse:, supplier:, estimated_delivery_date: 2.day.from_now, status: :delivered)
+
+      product_model = ProductModel.create!(supplier:, name: 'Cadeira Gamer', weight: 5, height: 100, width: 70,
+                                           depth: 75, sku: 'CAR-GAMER-1234')
+
+      # Act
+      stock_product = StockProduct.create!(order:, warehouse:, product_model:)
+      stock_product.create_stock_product_destination!(recipient: 'Phoenix Ikki', address: 'Phoenix Wings Rise')
+
+      # Assert
+      expect(stock_product.available?).to eq false
+    end
+  end
 end
