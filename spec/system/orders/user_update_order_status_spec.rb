@@ -48,7 +48,7 @@ describe 'User update order status' do
                                   address: 'Av do Porto, 1000', cep: '20000-000', description: 'Galpão do Rio')
 
     product_model = ProductModel.create!(supplier:, name: 'Cadeira Gamer', weight: 5, height: 100, width: 70, depth: 75,
-                                    sku: 'CAR-GAMER-1234')
+                                         sku: 'CAR-GAMER-1234')
 
     order = Order.create!(user:, warehouse:, supplier:, estimated_delivery_date: 2.day.from_now, status: :pending)
 
