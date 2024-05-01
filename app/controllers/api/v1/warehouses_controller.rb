@@ -5,4 +5,10 @@ class Api::V1::WarehousesController < ActionController::API
   rescue StandardError
     render status: 404
   end
+
+  def index
+    warehouses = Warehouse.all
+    render 200, json: warehouses
+  end
+  
 end

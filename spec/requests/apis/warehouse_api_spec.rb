@@ -31,4 +31,40 @@ describe 'Warehouse API' do
       expect(response.status).to eq 404
     end
   end
+
+  context 'GET /api/v1/warehouses' do
+    it 'sucess' do
+      # Arrange
+      Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
+                        address: 'Avenida do Aeroporto, 1000', cep: '15000-000',
+                        description: 'Galpão destinado para cargas internacionais')
+
+      Warehouse.create!(name: 'Rio', code: 'SDU', city: 'Rio de Janeiro', area: 60_000, address: 'Av do Porto, 1000',
+                        cep: '20000-000', description: 'Galpão do Rio')
+
+      # Act
+      get '/api/v1/warehouses'
+
+      # Assert
+      expect(response.status).to eq 200
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response.length).to eq 2
+      expect(json_response.first['name']).to eq 'Aeroporto SP'
+      expect(json_response.last['name']).to eq 'Rio'
+    end
+
+    it 'return empty if there is no warehouse' do
+      # Arrange
+
+      # Act
+      get '/api/v1/warehouses'
+
+      # Assert
+      expect(response.status).to eq 200
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response).to eq []
+    end
+  end
 end
