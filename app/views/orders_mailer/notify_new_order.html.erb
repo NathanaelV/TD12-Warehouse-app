@@ -1,2 +1,5 @@
 <h1>Novo Pedido</h1>
 <strong>Destino: <%= @order.warehouse.name %></strong>
+<%= @order.order_items.each do |item| %>
+  <%= item.quantity %> x <%= item.product_model.sku %>
+<% end %>

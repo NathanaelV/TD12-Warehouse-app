@@ -51,10 +51,6 @@ RSpec.describe OrdersMailer, type: :mailer do
       expect(mail.body).to include 'Novo Pedido'
       expect(mail.body).to include 'Destino: Galpão Rio'
       expect(mail.body).to include '5 x CAR-GAMER-1234'
-      expect(mail.body).to eq <<~BODY
-        <h1>Novo Pedido</h1>
-        <strong>Destino: <%= @order.warehouse.name %></strong>
-      BODY
     end
   end
 end
