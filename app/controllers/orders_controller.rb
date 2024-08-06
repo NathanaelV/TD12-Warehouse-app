@@ -19,6 +19,7 @@ class OrdersController < ApplicationController
     @order.user = current_user
 
     if @order.save
+      OrdersMailer.with(order: @order).notify_new_order.deliver
       redirect_to @order, notice: 'Pedido registrado com sucesso'
     else
       @warehouses = Warehouse.order(:name)
