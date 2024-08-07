@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'User update order status' do
-  it 'order was delivered' do
+RSpec.describe OrderDeliveredJob, type: :job do
+  it 'should create stock products' do
     # Arrange
     user = User.create!(name: 'Sergião', email: 'sergiao@email.com', password: '1234abcd')
 
@@ -19,25 +19,15 @@ describe 'User update order status' do
 
     OrderItem.create!(order:, product_model:, quantity: 5)
 
-    order_delivered_job_spy = spy('OrderDeliveredJob')
-    stub_const 'OrderDeliveredJob', order_delivered_job_spy
-
     # Act
-    login_as user
-    visit root_path
-    click_on 'Meus Pedidos'
-    click_on order.code
-    click_on 'Marcar como ENTREGUE'
+    OrderDeliveredJob.perform_now(order)
 
     # Assert
-    expect(current_path).to eq order_path(order)
-    expect(page).to have_content 'Status: Entregue'
-    expect(page).not_to have_button 'Marcar como ENTREGUE'
-    expect(page).not_to have_button 'Marcar como CANCELADO'
-    expect(OrderDeliveredJob).to have_received(:perform_later).with(order)
+    stock = StockProduct.where(product_model:, warehouse:).count
+    expect(stock).to eq 5
   end
 
-  it 'order was canceled' do
+  it 'should not create stock products' do
     # Arrange
     user = User.create!(name: 'Sergião', email: 'sergiao@email.com', password: '1234abcd')
 
@@ -55,16 +45,13 @@ describe 'User update order status' do
 
     OrderItem.create!(order:, product_model:, quantity: 5)
 
+    order.delivered!
+
     # Act
-    login_as user
-    visit root_path
-    click_on 'Meus Pedidos'
-    click_on order.code
-    click_on 'Marcar como CANCELADO'
+    OrderDeliveredJob.perform_now(order)
 
     # Assert
-    expect(current_path).to eq order_path(order)
-    expect(page).to have_content 'Status: Cancelado'
-    expect(StockProduct.count).to eq 0
+    stock = StockProduct.where(product_model:, warehouse:).count
+    expect(stock).to eq 0
   end
 end

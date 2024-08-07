@@ -45,14 +45,7 @@ class OrdersController < ApplicationController
   end
 
   def delivered
-    @order.delivered!
-
-    @order.order_items.each do |item|
-      item.quantity.times do
-        StockProduct.create!(order: @order, product_model: item.product_model, warehouse: @order.warehouse)
-      end
-    end
-
+    OrderDeliveredJob.perform_later(@order)
     redirect_to @order
   end
 

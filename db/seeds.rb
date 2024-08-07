@@ -38,3 +38,6 @@ ProductModel.find_or_create_by!(name: 'SoundBar 7.1 Surround', weight: 3000, wid
 
 # Order
 order = Order.find_or_create_by!(user:, warehouse:, supplier:, estimated_delivery_date: 2.day.from_now)
+
+# Order Item
+OrderItem.find_or_create_by!(product_model:, order:, quantity: 6)
