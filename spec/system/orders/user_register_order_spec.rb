@@ -32,6 +32,11 @@ describe 'User register an order' do
     allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('ABCD1234')
     future_date = 2.day.from_now.strftime('%d/%m/%Y')
 
+    mail = double('mail', deliver: true)
+    mailer_double = double('OrdersMailer', notify_new_order: mail)
+    allow(OrdersMailer).to receive(:with).and_return(mailer_double)
+    # allow(mailer_double).to receive(:notify_new_order).and_return(mail)
+
     # Act
     login_as(user)
     visit root_path
@@ -42,6 +47,8 @@ describe 'User register an order' do
     click_on 'Criar Pedido'
 
     # Assert
+    expect(mailer_double).to have_received(:notify_new_order)
+    expect(mail).to have_received(:deliver)
     expect(page).to have_content 'Pedido registrado com sucesso'
     expect(page).to have_content 'Pedido ABCD1234'
     expect(page).to have_content 'Galpão Destino: SDU - Galpão Rio'
