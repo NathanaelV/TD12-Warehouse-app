@@ -6,7 +6,7 @@ class Order < ApplicationRecord
   has_many :order_items
   has_many :product_models, through: :order_items
 
-  enum status: { pending: 0, delivered: 5, canceled: 9 }
+  enum status: { pending: 0, processing: 3, delivered: 5, canceled: 9 }
 
   validates :code, :estimated_delivery_date, presence: true
   validate :estimated_delivery_date_is_future

@@ -5,7 +5,6 @@ class OrderDeliveredJob < ApplicationJob
     return if order.delivered?
 
     logger.info "Iniciou processamento do pedido #{order.id}"
-    puts "Puts: Iniciou processamento do pedido #{order.id}"
     order.order_items.each do |item|
       item.quantity.times do
         StockProduct.create!(order:, product_model: item.product_model, warehouse: order.warehouse)
@@ -14,6 +13,5 @@ class OrderDeliveredJob < ApplicationJob
 
     order.delivered!
     logger.info "Finalizou processamento do pedido #{order.id}"
-    puts "Puts: Finalizou processamento do pedido #{order.id}"
   end
 end

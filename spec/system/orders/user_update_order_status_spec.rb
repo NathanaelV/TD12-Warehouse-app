@@ -31,7 +31,6 @@ describe 'User update order status' do
 
     # Assert
     expect(current_path).to eq order_path(order)
-    expect(page).to have_content 'Status: Entregue'
     expect(page).not_to have_button 'Marcar como ENTREGUE'
     expect(page).not_to have_button 'Marcar como CANCELADO'
     expect(OrderDeliveredJob).to have_received(:perform_later).with(order)

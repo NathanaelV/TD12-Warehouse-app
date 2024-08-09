@@ -25,6 +25,7 @@ RSpec.describe OrderDeliveredJob, type: :job do
     # Assert
     stock = StockProduct.where(product_model:, warehouse:).count
     expect(stock).to eq 5
+    expect(Order.last).to be_delivered
   end
 
   it 'should not create stock products' do

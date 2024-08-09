@@ -46,7 +46,7 @@ class OrdersController < ApplicationController
 
   def delivered
     OrderDeliveredJob.perform_later(@order)
-    puts 'O código passou por aqui!'
+    @order.processing!
     redirect_to @order
   end
 
