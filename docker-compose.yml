@@ -1,0 +1,9 @@
+services:
+  ruby-on-rails:
+    build: 
+      context: .
+      dockerfile: meu.dockerfile
+    container_name: warehouse
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
+    ports:
+      - 3000:3000
