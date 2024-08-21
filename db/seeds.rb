@@ -13,9 +13,10 @@ user = User.create!(name: 'Phoenix Ikki', email: 'ikki@saintseiya.com', password
 User.create!(name: 'Dragon Shiryu', email: 'shiryu@saintseiya.com', password: 'password')
 
 # Supplier
-supplier = Supplier.find_or_create_by!(corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number: '434472216000123',
-                                       full_address: 'Av das Palmas, 100', city: 'Bauru', state: 'SP',
-                                       email: 'contato@acme.com')
+supplier = Supplier.find_or_create_by!(corporate_name: 'ACME LTDA', brand_name: 'ACME',
+                                       registration_number: '434472216000123', full_address: 'Av das Palmas, 100',
+                                       city: 'Bauru', state: 'SP', email: 'contato@acme.com')
+
 Supplier.create(corporate_name: 'Spark Industries Brasil LTDA', brand_name: 'Spark',
                 registration_number: '434472216000123', full_address: 'Torre da Spark Brasil',
                 city: 'Teresina', state: 'PI', email: 'vendedor@spark.com.br')
@@ -25,8 +26,12 @@ warehouse = Warehouse.find_or_create_by!(name: 'Aeroporto SP', code: 'GRU', city
                                          address: 'Avenida do Aeroporto, 1000', cep: '15000-000',
                                          description: 'Galpão destinado para cargas internacionais')
 
-Warehouse.find_or_create_by!(name: 'Rio', code: 'SDU', city: 'Rio de Janeiro', area: 60_000, address: 'Av do Porto, 1000',
-                             cep: '20000-000', description: 'Galpão do Rio')
+Warehouse.find_or_create_by!(name: 'Rio', code: 'SDU', city: 'Rio de Janeiro', area: 60_000,
+                             address: 'Av do Porto, 1000', cep: '20000-000', description: 'Galpão do Rio')
+
+Warehouse.find_or_create_by!(name: 'Viracopos', code: 'VCP', city: 'Campinas', area: 80_000,
+                             address: ' Rod. Santos Dumont, km 60', cep: '13055-900',
+                             description: 'Galpão do aeroporto internacional de Campinas')
 
 # Product Model
 product_model = ProductModel.find_or_create_by!(supplier:, name: 'Cadeira Gamer', weight: 5, height: 100, width: 70,
@@ -41,3 +46,5 @@ order = Order.find_or_create_by!(user:, warehouse:, supplier:, estimated_deliver
 
 # Order Item
 OrderItem.find_or_create_by!(product_model:, order:, quantity: 6)
+
+puts 'All datas has been created'
