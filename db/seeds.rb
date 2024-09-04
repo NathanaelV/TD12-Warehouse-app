@@ -17,9 +17,9 @@ supplier = Supplier.find_or_create_by!(corporate_name: 'ACME LTDA', brand_name: 
                                        registration_number: '434472216000123', full_address: 'Av das Palmas, 100',
                                        city: 'Bauru', state: 'SP', email: 'contato@acme.com')
 
-Supplier.create(corporate_name: 'Spark Industries Brasil LTDA', brand_name: 'Spark',
-                registration_number: '434472216000123', full_address: 'Torre da Spark Brasil',
-                city: 'Teresina', state: 'PI', email: 'vendedor@spark.com.br')
+Supplier.find_or_create_by!(corporate_name: 'Spark Industries Brasil LTDA', brand_name: 'Spark',
+                            registration_number: '434472216000172', full_address: 'Torre da Spark Brasil',
+                            city: 'Teresina', state: 'PI', email: 'vendedor@spark.com.br')
 
 # Warehouse
 warehouse = Warehouse.find_or_create_by!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
